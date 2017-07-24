@@ -6,30 +6,30 @@ const cheerio = require('cheerio');
 const GITHUB_TRENDING_URL = 'https://github.com/trending';
 
 request(GITHUB_TRENDING_URL, (error, response, html) => {
-    if (!error) {
+    if (!error && response.statusCode == 200) {
         const $ = cheerio.load(html);
 
-        $('.repo-list')
-            .children('li')
-            .each(function (i, el) {
-                const repository = $(this).find('h3').text().trim().replace(/ /g, '').split('/');
-                const description = $(this).find('div.py-1 > p').text().trim();
-                const language = $(this).find('span[itemprop=programmingLanguage]').text().trim();
-                const totalStars = $(this).find('div.f6 > a').first().text().trim();
-                const forks = $(this).find('div.f6 > a').last().text().trim();
-                const starsToday = $(this).find('div.f6 > span').last().text().trim();
+        $('.repo-list').children('li').each(function (i, el) {
+            const repository = $(this).find('h3').text().trim().replace(/ /g, '').split('/');
+            const description = $(this).find('div.py-1 > p').text().trim();
+            const language = $(this).find('span[itemprop=programmingLanguage]').text().trim();
+            const totalStars = $(this).find('div.f6 > a').first().text().trim();
+            const forks = $(this).find('div.f6 > a').last().text().trim();
+            const starsToday = $(this).find('div.f6 > span').last().text().trim();
 
-                let data = {
-                    position: (i + 1),
-                    namespace: repository[0],
-                    name: repository[1],
-                    language: parseInt(language, 10) || null,
-                    totalStars: parseInt(totalStars, 10),
-                    starsToday: parseInt(starsToday, 10),
-                    forks: parseInt(forks, 10),
-                };
+            let data = {
+                position: (i + 1),
+                namespace: repository[0],
+                name: repository[1],
+                language: parseInt(language, 10) || null,
+                totalStars: parseInt(totalStars, 10),
+                starsToday: parseInt(starsToday, 10),
+                forks: parseInt(forks, 10),
+            };
 
-                console.log(data);
-            });
+            console.log(data);
+        });
+    } else {
+        console.log('An error occurred: ', error);
     }
 });
