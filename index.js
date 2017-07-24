@@ -21,7 +21,7 @@ request(GITHUB_TRENDING_URL, (error, response, html) => {
                 position: (i + 1),
                 namespace: repository[0],
                 name: repository[1],
-                language: parseInt(language, 10) || null,
+                language: language || null,
                 totalStars: parseInt(totalStars, 10),
                 starsToday: parseInt(starsToday, 10),
                 forks: parseInt(forks, 10),
