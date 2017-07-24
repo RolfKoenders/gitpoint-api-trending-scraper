@@ -12,7 +12,11 @@ request(GITHUB_TRENDING_URL, (error, response, html) => {
         $('.repo-list')
             .children('li')
             .each(function (i, el) {
-                console.log($(this).find('h3').text().trim());
+                const repoData = $(this).find('h3').text().trim().replace(/ /g, '').split('/');
+                const repositoryNamespace = repoData[0];
+                const repositoryName = repoData[1];
+
+                console.log(`${(i+1)}. ${repositoryNamespace} / ${repositoryName}`);
             });
     }
 });
