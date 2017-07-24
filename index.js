@@ -12,11 +12,24 @@ request(GITHUB_TRENDING_URL, (error, response, html) => {
         $('.repo-list')
             .children('li')
             .each(function (i, el) {
-                const repoData = $(this).find('h3').text().trim().replace(/ /g, '').split('/');
-                const repositoryNamespace = repoData[0];
-                const repositoryName = repoData[1];
+                const repository = $(this).find('h3').text().trim().replace(/ /g, '').split('/');
+                const description = $(this).find('div.py-1 > p').text().trim();
+                const language = $(this).find('span[itemprop=programmingLanguage]').text().trim();
+                const totalStars = $(this).find('div.f6 > a').first().text().trim();
+                const forks = $(this).find('div.f6 > a').last().text().trim();
+                const starsToday = $(this).find('div.f6 > span').last().text().trim();
 
-                console.log(`${(i+1)}. ${repositoryNamespace} / ${repositoryName}`);
+                let data = {
+                    position: (i + 1),
+                    namespace: repository[0],
+                    name: repository[1],
+                    language: parseInt(language, 10) || null,
+                    totalStars: parseInt(totalStars, 10),
+                    starsToday: parseInt(starsToday, 10),
+                    forks: parseInt(forks, 10),
+                };
+
+                console.log(data);
             });
     }
 });
