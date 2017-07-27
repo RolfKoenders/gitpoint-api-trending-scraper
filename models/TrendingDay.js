@@ -4,7 +4,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const TrendingDay = new Schema({
-    date: { type: Date, default: Date.now },
+    date: {
+        type: Date,
+        default: Date.now
+    },
     repositories: [{
         position: Number,
         namespace: String,
@@ -17,4 +20,3 @@ const TrendingDay = new Schema({
 });
 
 module.exports = mongoose.model('TrendingDay', TrendingDay);
-

@@ -13,7 +13,7 @@ const configSchema = convict({
         level: {
             doc: 'Level to log',
             format: String,
-            default: 'trace',
+            default: 'error',
             env: 'LOGGER_LEVEL'
         }
     },
@@ -21,7 +21,7 @@ const configSchema = convict({
         host: {
             doc: 'MongoDB host',
             format: String,
-            default: '127.0.0.1',
+            default: null,
             env: 'MONGODB_HOST'
         },
         port: {

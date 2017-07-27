@@ -14,7 +14,9 @@ const pino = require('pino')({
 
 mongoose.Promise = global.Promise;
 const mongodbUri = `mongodb://${config.mongo.host}:${config.mongo.port}/${config.mongo.database}`;
-mongoose.connect(mongodbUri, { useMongoClient: true });
+mongoose.connect(mongodbUri, {
+    useMongoClient: true
+});
 
 const db = mongoose.connection;
 db.on('error', (error) => {
