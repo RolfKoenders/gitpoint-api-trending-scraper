@@ -3,7 +3,7 @@
 > This project is part of the [GitPoint API]((https://github.com/RolfKoenders/gitpoint-api-docs)). More info about the GitPoint API can be found [here](https://github.com/RolfKoenders/gitpoint-api-docs).
 
 ## Introduction
-[GitPoint](https://github.com/gitpoint/git-point) is a Github app build in react-native. A incoming feature requests was to add Github trending to the app. Which is of course really cool but Github does not provide an api to retrieve the trending repositories. This is where the GitPoint API idea was born.
+[GitPoint](https://github.com/gitpoint/git-point) is a Github app build in react-native. A feature requests was to add Github trending to the app. Which is of course really cool but Github does not provide an api to retrieve the trending repositories. This is where the GitPoint API idea was born.
 
 This scraper is `scraping` all the trending repositories of the Github trending page and stores them in a MongoDB database. The actual API layer is used to retrieve them by HTTP requests. _(The API is still wip)_.
 
