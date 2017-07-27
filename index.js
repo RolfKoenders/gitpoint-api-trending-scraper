@@ -1,8 +1,10 @@
 'use strict';
 
+const config = require('./config');
 const mongoose = require('mongoose');
 const pino = require('pino')({
-    name: 'TrendingScraper'
+    name: config.logger.name,
+    level: config.logger.level || 'trace'
 });
 
 const trendingScraper = require('./lib/trending-scraper');
