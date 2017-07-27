@@ -7,13 +7,13 @@ const configSchema = convict({
         name: {
             doc: 'Name of the logger',
             format: String,
-            default: '',
+            default: 'TrendingScraper',
             env: 'LOGGER_NAME'
         },
-        logger: {
+        level: {
             doc: 'Level to log',
             format: String,
-            default: '',
+            default: 'trace',
             env: 'LOGGER_LEVEL'
         }
     },
@@ -35,6 +35,14 @@ const configSchema = convict({
             format: String,
             default: 'gitpoint',
             env: 'MONGODB_DB'
+        }
+    },
+    cron: {
+        pattern: {
+            doc: 'Conjob pattern for when the scraper runs',
+            format: String,
+            default: '0 * * * * *',
+            env: 'CRON_PATTERN'
         }
     }
 });
