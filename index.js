@@ -1,35 +1,40 @@
 'use strict';
 
+const mongoose = require('mongoose');
+const pino = require('pino')({
+    name: 'TrendingScraper'
+});
+
 const trendingScraper = require('./lib/trending-scraper');
 const TrendingDay = require('./models/TrendingDay');
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/gitpoint');
-
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/gitpoint', { useMongoClient: true });
 const db = mongoose.connection;
 db.on('error', (error) => {
-    console.error(error);
+    pino.error(error, 'Error while opening connection to Mongo');
 });
 
 db.once('open', () => {
     trendingScraper.scrapeIt()
         .then((repos) => {
-            console.log(repos);
-            let day = new TrendingDay({
+            pino.trace(repos, 'Scraped repositories');
+
+            const day = new TrendingDay({
                 repositories: repos
             });
 
             day.save((err, day) => {
                 if (err) {
-                    return console.error(err);
+                    pino.error(err, 'Error while saving trendingday to mongo');
+                    return err;
                 } else {
-                    console.log('Day inserted');
+                    pino.info('TrendingDay saved in Mongo.');
                     mongoose.disconnect();
                 }
             });
         })
         .catch((error) => {
-            console.error(error);
+            pino.error(error, 'Error while scraping repositories from Github');
         });
-
 });
