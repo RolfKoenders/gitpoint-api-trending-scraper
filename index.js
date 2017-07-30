@@ -2,6 +2,7 @@
 
 const config = require('./config');
 const mongoose = require('mongoose');
+const moment = require('moment');
 const CronJob = require('cron').CronJob;
 
 const trendingScraper = require('./lib/trending-scraper');
@@ -15,7 +16,8 @@ const pino = require('pino')({
 mongoose.Promise = global.Promise;
 const mongodbUri = `mongodb://${config.mongo.host}:${config.mongo.port}/${config.mongo.database}`;
 mongoose.connect(mongodbUri, {
-    useMongoClient: true
+    useMongoClient: true,
+    reconnectTries: Number.MAX_VALUE
 });
 
 const db = mongoose.connection;
@@ -24,22 +26,42 @@ db.on('error', (error) => {
 });
 
 const job = new CronJob(config.cron.pattern, () => {
+    const startOfDay = moment().startOf('day');
+    const endOfDay = moment().endOf('day');
+
     trendingScraper.scrapeIt()
         .then((repos) => {
             pino.trace(repos, 'Scraped repositories.');
 
-            const day = new TrendingDay({
-                repositories: repos
-            });
-
-            day.save((err, day) => {
+            TrendingDay.findOne({
+                date: {
+                    $gte: startOfDay,
+                    $lt: endOfDay
+                }
+            }, (err, trendingDay) => {
                 if (err) {
-                    pino.error(err, 'Error while saving trendingday to mongo.');
+                    pino.error(err, 'Error while trying to find in mongo.');
                     return err;
                 } else {
-                    pino.info('TrendingDay saved in Mongo.');
+                    if (trendingDay === null) {
+                        trendingDay = new TrendingDay({
+                            repositories: repos
+                        });
+                    } else {
+                        trendingDay.repositories = repos;
+                    }
+
+                    trendingDay.save((err, day) => {
+                        if (err) {
+                            pino.error(err, 'Error while saving trendingday to mongo.');
+                            return err;
+                        } else {
+                            pino.info('TrendingDay saved in Mongo.');
+                        }
+                    });
                 }
             });
+
         })
         .catch((error) => {
             pino.error(error, 'Error while scraping repositories from Github.');

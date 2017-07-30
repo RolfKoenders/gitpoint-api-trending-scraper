@@ -19,3 +19,5 @@ services:
             CRON_PATTERN: '0 * * * * *'
         depends_on:
             - "mongodb"
+        volumes:
+            - "./:/opt/app"
