@@ -20,9 +20,9 @@ At this moment we only scrape the repositories which are trending 'Today'. We sa
         namespace: String,
         name: String,
         language: String,
-        totalStars: Number,
-        starsToday: Number,
-        forks: Number
+        totalStars: String,
+        starsToday: String,
+        forks: String
     }]
 }
 ```
