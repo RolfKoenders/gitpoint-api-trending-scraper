@@ -21,3 +21,5 @@ services:
             - "mongodb"
         volumes:
             - "./:/opt/app"
+        ports:
+            - 1337:1337

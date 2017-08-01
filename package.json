@@ -1,28 +1,29 @@
 {
-    "name": "gitpoint-api-trending-scraper",
-    "version": "0.1.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "start": "node index.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/RolfKoenders/gitpoint-api-trending-scraper.git"
-    },
-    "author": "Rolf Koenders <@rolfkoenders>",
-    "bugs": {
-        "url": "https://github.com/RolfKoenders/gitpoint-api-trending-scraper/issues"
-    },
-    "homepage": "https://github.com/RolfKoenders/gitpoint-api-trending-scraper#readme",
-    "dependencies": {
-        "cheerio": "^1.0.0-rc.2",
-        "convict": "^4.0.0",
-        "cron": "^1.2.1",
-        "moment": "^2.18.1",
-        "mongoose": "^4.11.4",
-        "pino": "^4.7.1",
-        "request": "^2.81.0"
-    }
+  "name": "gitpoint-api-trending-scraper",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RolfKoenders/gitpoint-api-trending-scraper.git"
+  },
+  "author": "Rolf Koenders <@rolfkoenders>",
+  "bugs": {
+    "url": "https://github.com/RolfKoenders/gitpoint-api-trending-scraper/issues"
+  },
+  "homepage": "https://github.com/RolfKoenders/gitpoint-api-trending-scraper#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "cheerio": "^1.0.0-rc.2",
+    "convict": "^4.0.0",
+    "cron": "^1.2.1",
+    "moment": "^2.18.1",
+    "mongoose": "^4.11.4",
+    "pino": "^4.7.1",
+    "request": "^2.81.0"
+  }
 }
