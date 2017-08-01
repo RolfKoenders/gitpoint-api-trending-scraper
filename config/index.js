@@ -43,6 +43,20 @@ const configSchema = convict({
             format: String,
             default: '0 * * * * *',
             env: 'CRON_PATTERN'
+        },
+        timezone: {
+            doc: 'Timezone for the cron',
+            format: String,
+            default: null,
+            env: 'CRON_TIMEZONE'
+        }
+    },
+    http: {
+        port: {
+            doc: 'Port for the HTTP server to listen on',
+            format: 'port',
+            default: 1337,
+            env: 'HTTP_PORT'
         }
     }
 });

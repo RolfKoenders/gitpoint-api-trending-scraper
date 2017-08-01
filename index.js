@@ -21,7 +21,7 @@ const job = new CronJob(config.cron.pattern, () => {
 }, () => {
     // Function is called when cronjob is stopped.
     logger.info('Cronjob stopped. If you see this the cronjob probably crashed..');
-}, false, 'Europe/Amsterdam');
+}, false, config.cron.timezone);
 
 // Open DB connection and start CronJob!
 mongo.once('open', () => {
@@ -30,6 +30,6 @@ mongo.once('open', () => {
 });
 
 // Start listening for HTTP requests
-httpServer.listen(1337, '0.0.0.0', () => {
-    logger.info('HTTP Server is listening on port: 1337');
+httpServer.listen(config.http.port, '0.0.0.0', () => {
+    logger.info(`HTTP Server is listening on port: ${config.http.port}`);
 });

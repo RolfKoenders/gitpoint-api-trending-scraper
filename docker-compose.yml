@@ -17,6 +17,8 @@ services:
             MONGODB_PORT: 27017
             MONGODB_DB: gitpoint
             CRON_PATTERN: '0 * * * * *'
+            CRON_TIMEZONE: 'Europe/Amsterdam'
+            HTTP_PORT: 1337
         depends_on:
             - "mongodb"
         volumes:
