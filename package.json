@@ -25,5 +25,11 @@
     "mongoose": "^4.11.4",
     "pino": "^4.7.1",
     "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "ava": "^0.21.0",
+    "gulp-ava": "^0.18.0",
+    "nock": "^9.0.14"
   }
 }
