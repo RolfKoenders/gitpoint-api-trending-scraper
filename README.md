@@ -5,9 +5,9 @@
 ## Introduction
 [GitPoint](https://github.com/gitpoint/git-point) is a Github app build in react-native. A feature requests was to add Github trending to the app. Which is of course really cool but Github does not provide an api to retrieve the trending repositories. This is where the GitPoint API idea was born.
 
-This scraper is `scraping` all the trending repositories of the Github trending page and stores them in a MongoDB database. The actual API layer is used to retrieve them by HTTP requests. _(The API is still wip)_.
+This scraper is `scraping` all the trending repositories of the Github trending page and stores them in a MongoDB database. The [GitPoint API](https://github.com/RolfKoenders/gitpoint-api) is used to retrieve them.
 
-## Model
+## Data model
 At this moment we only scrape the repositories which are trending 'Today'. We save them with the following model to a mongo collection.
 ```javascript
 {
@@ -42,12 +42,22 @@ This launches a container running MongoDB and a container with the scraper. The 
 ## Configuration
 To customize the configuration you can use the following environment variables.
 
-| env          | description                        | default         | required |
-|--------------|------------------------------------|-----------------|----------|
-| LOGGER_NAME  | Name of the logger.                | TrendingScraper | ✓        |
-| LOGGER_LEVEL | The level of the logger to output. | error           | ✓        |
-| MONGODB_HOST | Host of the mongodb instance       | -               | ✓        |
-| MONGODB_PORT | Port of the mongodb instance       | -               | ✓        |
-| MONGODB_DB   | Database to use                    | gitpoint        | ✓        |
-| CRON_PATTERN | Cronjob pattern for the scraper    | `'0 * * * * *'` | ✓        |
+| env           | description                        | default         | required |
+|---------------|------------------------------------|-----------------|----------|
+| LOGGER_NAME   | Name of the logger.                | TrendingScraper | ✓        |
+| LOGGER_LEVEL  | The level of the logger to output. | error           | ✓        |
+| MONGODB_HOST  | Host of the mongodb instance       | -               | ✓        |
+| MONGODB_PORT  | Port of the mongodb instance       | -               | ✓        |
+| MONGODB_DB    | Database to use                    | gitpoint        | ✓        |
+| CRON_PATTERN  | Cronjob pattern for the scraper    | `'0 * * * * *'` | ✓        |
+| CRON_TIMEZONE | Time zone of the cronjob           | -               | ✓        |
+| HTTP_PORT     | Port for the HTTP server.          | 1337            | ✓        |
 
+## HTTP Actions
+There is a HTTP server which can be used to trigger a scrape action and to check if the application is launched / still running.
+
+### GET /scrape
+Will trigger the scraper.
+
+### GET /health
+Returns 200 'OK' if running.
