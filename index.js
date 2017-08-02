@@ -11,25 +11,25 @@ const httpServer = require('./lib/http-server');
 
 // CronJob
 const job = new CronJob(config.cron.pattern, () => {
-    scraper.scrape()
-        .then(() => {
-            logger.trace('Succesfully inserted scraped data');
-        })
-        .catch((err) => {
-            logger.error('Succesfully inserted scraped data');
-        });
+	scraper.scrape()
+		.then(() => {
+			logger.trace('Succesfully inserted scraped data');
+		})
+		.catch(() => {
+			logger.error('Succesfully inserted scraped data');
+		});
 }, () => {
-    // Function is called when cronjob is stopped.
-    logger.info('Cronjob stopped. If you see this the cronjob probably crashed..');
+	// Function is called when cronjob is stopped.
+	logger.info('Cronjob stopped. If you see this the cronjob probably crashed..');
 }, false, config.cron.timezone);
 
 // Open DB connection and start CronJob!
 mongo.once('open', () => {
-    // Start cronjob
-    job.start();
+	// Start cronjob
+	job.start();
 });
 
 // Start listening for HTTP requests
 httpServer.listen(config.http.port, '0.0.0.0', () => {
-    logger.info(`HTTP Server is listening on port: ${config.http.port}`);
+	logger.info(`HTTP Server is listening on port: ${config.http.port}`);
 });

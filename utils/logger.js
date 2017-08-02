@@ -1,10 +1,11 @@
 'use strict';
 
+const pino = require('pino');
 const config = require('../config');
 
-const pino = require('pino')({
-    name: config.logger.name,
-    level: config.logger.level
+const logger = pino({
+	name: config.logger.name,
+	level: config.logger.level
 });
 
-module.exports = pino;
+module.exports = logger;
