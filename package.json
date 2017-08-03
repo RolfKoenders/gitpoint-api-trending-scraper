@@ -6,6 +6,7 @@
 	"scripts": {
 		"start": "node index.js",
 		"test": "gulp test",
+		"precommit": "gulp lint",
 		"prepush": "npm test"
 	},
 	"repository": {
