@@ -18,7 +18,8 @@
 		"url": "https://github.com/RolfKoenders/gitpoint-api-trending-scraper/issues"
 	},
 	"xo": {
-		"settings": {
+		"rules": {
+			"import/no-unresolved": 0
 		}
 	},
 	"dependencies": {
