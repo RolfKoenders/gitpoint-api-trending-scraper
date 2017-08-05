@@ -1,7 +1,8 @@
+dist: trusty
+os: linux
 language: node_js
 node_js:
 
 before_script:
   - npm install -g gulp-cli
-
 script: gulp test

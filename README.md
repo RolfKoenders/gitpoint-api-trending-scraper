@@ -1,5 +1,9 @@
 
 # GitPoint - API - Trending Scraper
+[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
+[![Build Status](https://travis-ci.org/RolfKoenders/gitpoint-api-trending-scraper.svg?branch=master)](https://travis-ci.org/RolfKoenders/gitpoint-api-trending-scraper)
+[![Dependency Status](https://dependencyci.com/github/RolfKoenders/gitpoint-api-trending-scraper/badge)](https://dependencyci.com/github/RolfKoenders/gitpoint-api-trending-scraper)
+
 > This project is part of the [GitPoint API]((https://github.com/RolfKoenders/gitpoint-api-docs)). More info about the GitPoint API can be found [here](https://github.com/RolfKoenders/gitpoint-api-docs).
 
 ## Introduction
