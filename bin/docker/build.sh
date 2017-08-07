@@ -3,9 +3,9 @@
 DOCKER_REPOSITORY="rolfkoenders/gitpoint-api-trending-scraper"
 DOCKER_TAG="develop"	# default tag
 
-if [ "$TRAVIS_BRANCH" == "master" ]
+if [ $TRAVIS_BRANCH = "master" ]
 then
-	$DOCKER_TAG="master"
+	DOCKER_TAG="master"
 fi
 
 echo "Docker login"
