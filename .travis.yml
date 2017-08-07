@@ -1,8 +1,22 @@
-dist: trusty
-os: linux
 language: node_js
 node_js:
 
+services:
+- docker
+
 before_script:
-  - npm install -g gulp-cli
-script: gulp test
+- npm install -g gulp-cli
+
+script:
+- gulp test
+
+env:
+  global:
+  - secure: HMP2aqD8Hq1LCIWlWV2j0WRqEXX3VrptfYwJieB+EphzwcIb1xFWpzKAPBDOhi7gIsboX+FICaDK86k4u4P8TF//DxZEiF7lvfUJD8dYxnBF9dAiOt6m8Ur8su8wDS9uOYNYduJ4wvL/LOidU/yimM5lbbZAzDGYkAHQpWAe+rM0861KbPr+8rYbZuLpV9rfH+iIDTbTugGXzF9Z0CPGI9GdkA36XEbog9dRP/sPrPxe4bcUuDy1MsnVlJlyH1XWlR4kggi12TbITKFK1wnSKA/HCK2Z4vGSPlQJ5IktB8yB9w7hpla6/wQWJAxfkxk69Emd7emxzvcvHuBsdIgppdqiIwN65YaO/H9wZw266cXyxnh8t3iVvWkZB79j9E11mnsmezhE0dS06u+YD2ZdLtF/8gW/GTndF6tnj/bDxDj7Y6jQPx2Hv4uhv3bXHiq+JHE1IGYc4aiu0yd9jXSqZQyNespy+Te8WOheILuPU+AvQQZaaUFU4comnanZePhrC2MRtxmC0tG7i/6GWupxiJ935fYxOSxWbQYJ0pZS7tpqTHzyT1QvEk7Qjp62e7n/EDJtKX6K4EoYzhUZyw0fGNh4jy/JEbsnfVMnn5Mq9JNCDtyERwT5Yp0N94bEk0dQFtNGfhRCKrah+b+6USCuC56pfD0EioafvqFhfl79fhA=
+  - secure: rXCovSGmhaxbviqy6qn6c0xKZxUFtkFMut8gaZ6cSZH2fWRr2KHFf9I6C36D68mgyHjcspZEVrKvWteydrryoUDP7zNv/pCfl/e9BrgWkElBSIyrcOAS62rLSjCSPtSV1bh/lppU7SLnBXhyiAc6C+NGBvBo+IcgcF7bZDc/ubhfwnj7bch1sgEfh1EZtxtzhdfTrE3eZTf/jO9ygyjf9P0VSur2XwjwmEOg/fa5iee7zrhMYm2JmBzjvrEMvgcahxrlORpoDtgfD3AaA+Tf2QzBHrP7tWm6K/G8SvVR+GjEAiwvloPPY8gPSG3g3V1UtPkX2RXqRmT66EW+xqwcJWGdg+4SaoiF6ciJ5nAFPcv3CStzpTsIWP0oeRdcH1cBIrdDecSmLTtsB1/LKM1JkdmqsGP0VoP63o0kbyIJx4qg/sNzILt2C371wEwmx86gEUQIpvO05FpRvB+L1oAwnMwQ4n4ZKVGxtYIVZdlu/UqGmN53NBylEFmCs1B0CCWONp1g54J/RVSJ6V4a7TF3jUOoJ58SSUcYHP1pzEdLCngcJp2Q/93BIU/d1nfHMKiA7JZcdu9QBm1g50ERSIU0A4jKKW68QAj/xis19VDthSw5YwXYv1jfqQ6Ovwl9I7UvcTgSTy3P6mm0Vt0Pc/08bkDekXo9hYGFIbvpoH8HFBI=
+
+after_success:
+- docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+- export REPO=$DOCKER_USER/gitpoint-api-trending-scraper
+- docker build -f Dockerfile -t $REPO:$TRAVIS_BRANCH
+- docker push $REPO
