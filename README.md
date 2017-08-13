@@ -23,6 +23,7 @@ At this moment we only scrape the repositories which are trending 'Today'. We sa
         position: Number,
         namespace: String,
         name: String,
+		description: String,
         language: String,
         totalStars: String,
         starsToday: String,
